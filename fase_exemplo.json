@@ -1,0 +1,49 @@
+{
+  "version": 5,
+  "meta": {"name": "Fase Exemplo"},
+  "settings": {
+    "resetCollectiblesOnDeath": false,
+    "resetLogicOnDeath": false,
+    "resetEnemiesOnDeath": true
+  },
+  "spawn": {"c": 1, "r": 8},
+  "goal": {"c": 28, "r": 8},
+  "walls": [
+    {"id": 1, "c": 7, "r": 6, "w": 1, "h": 6},
+    {"id": 2, "c": 20, "r": 4, "w": 1, "h": 8}
+  ],
+  "enemies": [
+    {
+      "id": 1,
+      "type": "moving",
+      "mode": "patrol",
+      "speed": 90,
+      "start": {"x": 320, "y": 160},
+      "end": {"x": 576, "y": 352},
+      "angle": 0
+    },
+    {
+      "id": 2,
+      "type": "guided",
+      "speed": 75,
+      "route": [
+        {"x": 704, "y": 128},
+        {"x": 832, "y": 128},
+        {"x": 832, "y": 288},
+        {"x": 704, "y": 288}
+      ]
+    }
+  ],
+  "portals": [
+    {"id": 1, "a": {"c": 3, "r": 3}, "b": {"c": 25, "r": 14}}
+  ],
+  "checkpoints": [
+    {"id": 1, "c": 14, "r": 8}
+  ],
+  "keyDoors": [],
+  "buttons": [],
+  "coins": [
+    {"id": 1, "c": 10, "r": 3},
+    {"id": 2, "c": 18, "r": 14}
+  ]
+}

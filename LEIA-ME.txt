@@ -1,0 +1,22 @@
+EDITOR DE MAPAS SAN v5 — PACOTE DE TESTE
+
+COMO ABRIR
+1. Extraia este ZIP para uma pasta.
+2. Dê dois cliques em index.html.
+3. O editor abrirá no navegador padrão.
+4. Não precisa instalar nada e não precisa de internet.
+
+COMO TESTAR
+- Crie paredes, inimigos, checkpoints, moedas, portais e lógica.
+- Clique em "Testar" para jogar a fase.
+- Use WASD ou as setas para mover o jogador.
+- Use "Salvar JSON" para exportar a fase.
+- Use "Abrir JSON" para carregar uma fase salva.
+
+IMPORTANTE
+- O editor roda localmente no navegador.
+- O autosave usa o armazenamento local do navegador daquele computador.
+- Se o navegador bloquear alguma função por segurança, tente Chrome, Edge ou Firefox atualizados.
+- Para compartilhar uma fase, envie somente o arquivo .json gerado.
+
+Versão de teste: v5
