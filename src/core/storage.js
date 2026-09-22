@@ -1,0 +1,1 @@
+'use strict';function restoreDraft(){try{const s=localStorage.getItem('sanMapEditorV11Draft')||localStorage.getItem('sanMapEditorV7Draft')||localStorage.getItem('sanMapEditorV6Draft')||localStorage.getItem('sanMapEditorV5Draft');if(s){normalizeMap(parseMapJson(s));return true;}}catch{try{localStorage.removeItem('sanMapEditorV11Draft');}catch{}}return false;}

@@ -1,0 +1,11 @@
+'use strict';
+restoreDraft();
+normalizeMap(map);
+syncDocumentControls();
+resetHistory();
+updateGuideButtons();
+updateStatus();
+refreshTemplates();
+applyZoom();
+draw();
+document.querySelectorAll('.tool').forEach(btn=>btn.classList.toggle('active',btn.dataset.tool===tool));

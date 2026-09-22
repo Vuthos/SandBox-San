@@ -1,34 +1,25 @@
 # Changelog
 
+## v1.1.3 — hardening e publicação modular
+
+- Adicionado `src/core/security.js`.
+- Importação recusa JSON acima de 2,5 MB e volume abusivo de objetos/rotas.
+- `core/model.js` reconstrói explicitamente o esquema SAN Map e descarta campos desconhecidos.
+- Números, IDs, coordenadas, velocidades e textos importados são normalizados.
+- Templates deixaram de usar `innerHTML` para nomes controlados pelo usuário.
+- Rascunhos, templates, criação, duplicação e rotas respeitam limites defensivos.
+- Adicionado `SECURITY.md`.
+- Repositório passa a publicar a árvore modular completa.
+- Formato SAN Map permanece v7.
+
 ## v1.1.2 — correção do nome da fase
 
-- O campo **Nome da fase** agora sincroniza com `map.meta.name` enquanto o usuário digita.
-- Salvar JSON sem tirar o foco do campo não volta mais para o nome anterior ou `Nova fase`.
-- A caixa de JSON avançado também força a sincronização do nome antes de gerar o conteúdo.
-- Nome vazio é normalizado para `Nova fase` ao finalizar/exportar.
-- Formato SAN Map permanece na versão 7.
+- Campo Nome da fase sincroniza em tempo real com `map.meta.name`.
 
-## v1.1.1 — correções de movimento e rotas
+## v1.1.1 — movimento e rotas
 
-- Corrigido o padrão de velocidade dos novos inimigos: a última velocidade aplicada no Inspector passa a ser usada como velocidade padrão ao criar os próximos.
-- Corrigido movimento em alta velocidade: inimigos guiados e patrulhas agora preservam o deslocamento restante ao cruzar nós/pontos da rota, evitando perda aparente de velocidade em loops rápidos.
-- Corrigida a remoção de inimigos guiados: a linha/rota deixou de contar como ocupação de célula. Inimigos podem cruzar ou compartilhar trajetórias sem serem apagados ao editar objetos no caminho.
-- Formato SAN Map permanece na versão 7; nenhuma fase antiga precisa ser convertida novamente.
+- Velocidade padrão, movimento em alta velocidade e rotas compartilhadas corrigidos.
 
 ## v1.1 — reorganização da base
 
-- Reorganização do projeto em pastas de código-fonte.
-- `index.html` mantido como ponto de entrada.
-- CSS extraído para `styles/main.css`.
-- Ícone movido para `assets/icons/`.
-- Lógica de inimigos separada em `src/game/enemies.js`.
-- Jogador, colisões e runtime separados.
-- Ferramentas do editor, seleção, clipboard, viewport, templates e validação separados.
-- Renderização isolada em `src/render/renderer.js`.
-- Interface e Inspector separados da engine.
-- Compatibilidade preservada com SAN Map v7.
-- Novo namespace de armazenamento local da v1.1, com importação dos rascunhos antigos.
-
-### Objetivo
-
-Nenhuma mecânica nova é o foco desta versão. O trabalho da v1.1 é reduzir dívida técnica e preparar a base para as próximas etapas do editor.
+- Código separado em `core`, `editor`, `game`, `render` e `ui`.

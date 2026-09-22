@@ -1,0 +1,11 @@
+'use strict';
+let mode='edit',tool='wall',dragging=false,deaths=0,won=false,raf=null,last=0;
+let map=freshMap(),selected=null;
+let pendingPortal=null,pendingKey=null,pendingButton=null,pendingPatrol=null,pendingGuide=null;
+let appendRouteTarget=null,routeDrag=null;
+let player=null,simEnemies=[],collectedCoins=new Set(),collectedKeys=new Set(),disabledTargets=new Set();
+let activeCheckpoint=null,respawnPoint=null,buttonInside=new Set();
+let history=[],historyIndex=-1,historyLock=false;
+let viewportZoom=1,panState=null,spacePan=false;
+let selectedItems=[],clipboardItems=[],selectToggleMode=false,selectionRect=null,selectionStart=null;
+let templatesCache=[];

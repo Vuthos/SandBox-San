@@ -1,70 +1,39 @@
-# Editor de Mapas San — v1.1.2
+# SandBox / Editor de Mapas San — v1.1.3
 
-A v1.1.2 mantém a reorganização arquitetural da v1.1 e corrige a sincronização do nome das fases, além das correções de estabilidade em velocidade e rotas. O objetivo desta versão é consolidar a base de código antes de adicionar novas mecânicas.
-
-A interface continua partindo de `index.html`, mas a lógica deixou de ficar concentrada em um único arquivo. O projeto agora separa modelo, editor, jogo, renderização e interface em pastas próprias.
+Editor visual de fases 2D em HTML5 Canvas. A v1.1.3 adiciona hardening para tratar mapas JSON de terceiros como entrada não confiável, mantendo o formato **SAN Map v7**.
 
 ## Estrutura
 
 ```text
-Editor_de_Mapas_San_v1.1/
+SandBox-San/
 ├── index.html
-├── assets/
-│   └── icons/
-│       └── san-icon.png
-├── styles/
-│   └── main.css
+├── assets/icons/san-icon.png
+├── styles/main.css
 ├── src/
-│   ├── app.js
 │   ├── core/
-│   │   ├── config.js
-│   │   ├── dom.js
-│   │   ├── history.js
-│   │   ├── model.js
-│   │   ├── state.js
-│   │   └── storage.js
 │   ├── editor/
-│   │   ├── clipboard.js
-│   │   ├── selection.js
-│   │   ├── templates.js
-│   │   ├── tools.js
-│   │   ├── validation.js
-│   │   └── viewport.js
 │   ├── game/
-│   │   ├── collision.js
-│   │   ├── enemies.js
-│   │   ├── player.js
-│   │   └── runtime.js
 │   ├── render/
-│   │   └── renderer.js
 │   └── ui/
-│       ├── actions.js
-│       └── inspector.js
-└── docs/
-    └── ARCHITECTURE.md
+├── docs/ARCHITECTURE.md
+└── SECURITY.md
 ```
 
-## O que cada área faz
+## Hardening da v1.1.3
 
-- `core/`: estado, modelo do mapa, histórico, armazenamento e referências principais.
-- `editor/`: ferramentas de criação, seleção, copiar/colar, zoom/pan, templates e validação.
-- `game/`: regras executadas durante o teste da fase: jogador, inimigos, colisões e loop.
-- `render/`: desenho do mapa e dos objetos no Canvas.
-- `ui/`: botões e Inspector.
-- `app.js`: inicialização final da aplicação.
+- limite de tamanho para JSON importado;
+- limites de objetos e pontos de rota;
+- reconstrução explícita do esquema SAN Map;
+- normalização de números, IDs, coordenadas, velocidades e textos;
+- templates renderizados com APIs DOM seguras (`textContent`), sem `innerHTML`;
+- rascunhos e templates locais passam pelos mesmos limites defensivos.
 
-## Versão do editor x versão do mapa
-
-O aplicativo foi reorganizado como **v1.1**, mas o formato de arquivo continua sendo **SAN Map v7** para preservar compatibilidade com mapas criados anteriormente.
-
-A v1.1 consegue importar rascunhos das versões v5, v6 e v7 e passa a salvar seu próprio rascunho local.
+Leia `SECURITY.md` para os limites atuais.
 
 ## Executar
 
-Abra `index.html` em um navegador moderno. Para desenvolvimento no GitHub Pages ou em servidor local, basta publicar a pasta mantendo a mesma estrutura.
+Abra `index.html` em um navegador moderno ou publique a raiz no GitHub Pages. Não há etapa de build nem dependência externa.
 
-Não existe etapa de build nem dependência externa nesta versão.
+## Filosofia
 
-## Filosofia da v1.1
-
-Esta versão não existe para adicionar mais conteúdo. Ela existe para tornar o projeto mais fácil de ler, manter, testar e expandir. A próxima mecânica deve entrar em um módulo adequado em vez de aumentar um único arquivo monolítico.
+A série v1.1.x prioriza estabilidade, segurança e manutenção antes de novas mecânicas.
