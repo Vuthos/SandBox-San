@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Catálogo comunitário de fases do SandBox San.">
 <meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none';">
 <title>SandBox Comunidade</title>
 <link rel="stylesheet" href="../styles/main.css">
 <style>
@@ -29,6 +30,15 @@
 <script>
 'use strict';
 const API='https://api.github.com/repos/Vuthos/SandBox-San/issues';
+const OFFICIAL_ORIGIN='https://vuthos.github.io';
+const OFFICIAL_PATH='/SandBox-San/';
+function officialShareUrl(value){
+  try{
+    const u=new URL(value);
+    const p=u.pathname.replace(/\/+$/,'')+'/';
+    return u.protocol==='https:'&&u.origin===OFFICIAL_ORIGIN&&p===OFFICIAL_PATH&&u.hash.includes('san=');
+  }catch{return false;}
+}
 const grid=document.getElementById('levelGrid');
 const state=document.getElementById('catalogState');
 function clean(v,max){return String(v||'').replace(/[\u0000-\u001F\u007F]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);}
@@ -39,7 +49,7 @@ function parse(issue){
   const lm=body.match(/\*\*Link:\*\*\s+(https?:\/\/\S+)/i);
   if(!lm)return null;
   let link;
-  try{link=new URL(lm[1]);if(!link.hash.includes('san='))return null;}catch{return null;}
+  try{link=new URL(lm[1]);if(!officialShareUrl(link))return null;}catch{return null;}
   const am=body.match(/\*\*Autor:\*\*\s+([^\n\r]+)/i);
   const tm=body.match(/\*\*Fase:\*\*\s+([^\n\r]+)/i);
   return {
