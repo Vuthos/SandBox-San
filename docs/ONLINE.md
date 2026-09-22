@@ -1,6 +1,6 @@
-# SandBox Online — v1.2.0
+# SandBox Online — v1.2.1
 
-A v1.2.0 inicia a camada comunitária do SandBox sem exigir um servidor privado.
+A v1.2.1 inicia a camada comunitária do SandBox sem exigir um servidor privado.
 
 ## O que funciona
 
