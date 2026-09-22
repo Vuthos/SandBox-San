@@ -1,7 +1,44 @@
 'use strict';
-function applyZoom(){canvas.style.width=`${Math.round(canvas.width*viewportZoom)}px`;canvas.style.height=`${Math.round(canvas.height*viewportZoom)}px`;if(zoomResetBtn)zoomResetBtn.textContent=`${Math.round(viewportZoom*100)}%`;}function setZoom(z){viewportZoom=clamp(z,.5,3);applyZoom();}zoomOutBtn&&(zoomOutBtn.onclick=()=>setZoom(viewportZoom-.1));zoomInBtn&&(zoomInBtn.onclick=()=>setZoom(viewportZoom+.1));zoomResetBtn&&(zoomResetBtn.onclick=()=>setZoom(1));applyZoom();
-canvasWrap?.addEventListener('wheel',ev=>{if(!(ev.ctrlKey||ev.metaKey))return;ev.preventDefault();setZoom(viewportZoom+(ev.deltaY<0?.1:-.1));},{passive:false});addEventListener('keydown',ev=>{if(ev.code==='Space'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))spacePan=true;});addEventListener('keyup',ev=>{if(ev.code==='Space')spacePan=false;});
-canvas.addEventListener('pointerdown',ev=>{selectToggleMode=!!(ev.ctrlKey||ev.metaKey||ev.shiftKey);if(mode!=='edit')return;if((ev.button===1||spacePan)&&canvasWrap){panState={x:ev.clientX,y:ev.clientY,sl:canvasWrap.scrollLeft,st:canvasWrap.scrollTop};ev.preventDefault();ev.stopPropagation();}else if(tool==='select'&&!selectToggleMode){const p=pointerPos(ev),w=wallAt(p.c,p.r),e=enemyAtPoint(p.x,p.y);if(!w&&!e){selectionStart=p;selectionRect={x1:p.x,y1:p.y,x2:p.x,y2:p.y};}}},true);
-canvasWrap?.addEventListener('pointermove',ev=>{if(panState){canvasWrap.scrollLeft=panState.sl-(ev.clientX-panState.x);canvasWrap.scrollTop=panState.st-(ev.clientY-panState.y);}},true);addEventListener('pointerup',()=>{panState=null;selectToggleMode=false;});
-canvas.addEventListener('pointermove',ev=>{if(selectionStart&&dragging&&tool==='select'&&mode==='edit'){const p=pointerPos(ev);selectionRect={x1:selectionStart.x,y1:selectionStart.y,x2:p.x,y2:p.y};draw();}},true);
-canvas.addEventListener('pointerup',()=>{if(selectionStart&&selectionRect){const x1=Math.min(selectionRect.x1,selectionRect.x2),y1=Math.min(selectionRect.y1,selectionRect.y2),x2=Math.max(selectionRect.x1,selectionRect.x2),y2=Math.max(selectionRect.y1,selectionRect.y2),hits=[];for(const w of map.walls){const r=rectWall(w);if(r.x<x2&&r.x+r.w>x1&&r.y<y2&&r.y+r.h>y1)hits.push({kind:'wall',id:w.id});}for(const e of map.enemies){const p=enemyAnchor(e);if(p&&p.x>=x1&&p.x<=x2&&p.y>=y1&&p.y<=y2)hits.push({kind:'enemy',id:e.id});}if(hits.length){selectedItems=hits;selected=hits[0];showProperties();}else clearSelection();selectionStart=null;selectionRect=null;draw();}},true);
+function applyZoom(){
+  canvas.style.width=`${Math.round(canvas.width*viewportZoom)}px`;
+  canvas.style.height=`${Math.round(canvas.height*viewportZoom)}px`;
+  if(zoomResetBtn)zoomResetBtn.textContent=`${Math.round(viewportZoom*100)}%`;
+}
+function setZoom(z){viewportZoom=clamp(z,.5,3);applyZoom();}
+zoomOutBtn&&(zoomOutBtn.onclick=()=>setZoom(viewportZoom-.1));
+zoomInBtn&&(zoomInBtn.onclick=()=>setZoom(viewportZoom+.1));
+zoomResetBtn&&(zoomResetBtn.onclick=()=>setZoom(1));
+applyZoom();
+
+canvasWrap?.addEventListener('wheel',ev=>{
+  if(!(ev.ctrlKey||ev.metaKey))return;
+  ev.preventDefault();
+  setZoom(viewportZoom+(ev.deltaY<0?.1:-.1));
+},{passive:false});
+
+addEventListener('keydown',ev=>{
+  if(ev.code==='Space'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))spacePan=true;
+});
+addEventListener('keyup',ev=>{if(ev.code==='Space')spacePan=false;});
+
+canvas.addEventListener('pointerdown',ev=>{
+  selectToggleMode=!!(ev.ctrlKey||ev.metaKey||ev.shiftKey);
+  if(mode!=='edit')return;
+  if((ev.button===1||spacePan)&&canvasWrap){
+    panState={x:ev.clientX,y:ev.clientY,sl:canvasWrap.scrollLeft,st:canvasWrap.scrollTop};
+    ev.preventDefault();
+    ev.stopPropagation();
+  }
+},true);
+
+canvasWrap?.addEventListener('pointermove',ev=>{
+  if(panState){
+    canvasWrap.scrollLeft=panState.sl-(ev.clientX-panState.x);
+    canvasWrap.scrollTop=panState.st-(ev.clientY-panState.y);
+  }
+},true);
+
+addEventListener('pointerup',()=>{
+  panState=null;
+  selectToggleMode=false;
+});
