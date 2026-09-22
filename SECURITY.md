@@ -18,3 +18,10 @@ A versão offline não possui backend, autenticação, banco remoto, tokens ou e
 - Rascunhos/templates do `localStorage` passam pelos mesmos limites.
 
 Uma futura versão online precisará também de validação no servidor, autenticação, autorização, rate limiting e moderação.
+
+
+## Camada online v1.2.0
+
+A v1.2.0 introduz compartilhamento por URL e leitura pública da API do GitHub. Um mapa vindo de link passa novamente pelos limites de tamanho/estrutura e pela normalização antes de ser carregado. O catálogo não renderiza HTML fornecido por usuários: títulos e autores são inseridos como texto.
+
+GitHub Issues é usado como catálogo público nesta etapa, portanto todo conteúdo enviado ali deve ser tratado como não confiável. Uma futura API própria deverá repetir validação no servidor, aplicar autenticação/autorização, rate limiting, moderação e políticas de abuso.
