@@ -1,6 +1,6 @@
-# Editor de Mapas San — v1.1.1
+# Editor de Mapas San — v1.1.2
 
-A v1.1.1 mantém a reorganização arquitetural da v1.1 e adiciona correções de estabilidade em velocidade e rotas. O objetivo desta versão é consolidar a base de código antes de adicionar novas mecânicas.
+A v1.1.2 mantém a reorganização arquitetural da v1.1 e corrige a sincronização do nome das fases, além das correções de estabilidade em velocidade e rotas. O objetivo desta versão é consolidar a base de código antes de adicionar novas mecânicas.
 
 A interface continua partindo de `index.html`, mas a lógica deixou de ficar concentrada em um único arquivo. O projeto agora separa modelo, editor, jogo, renderização e interface em pastas próprias.
 

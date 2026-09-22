@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.2 — correção do nome da fase
+
+- O campo **Nome da fase** agora sincroniza com `map.meta.name` enquanto o usuário digita.
+- Salvar JSON sem tirar o foco do campo não volta mais para o nome anterior ou `Nova fase`.
+- A caixa de JSON avançado também força a sincronização do nome antes de gerar o conteúdo.
+- Nome vazio é normalizado para `Nova fase` ao finalizar/exportar.
+- Formato SAN Map permanece na versão 7.
+
 ## v1.1.1 — correções de movimento e rotas
 
 - Corrigido o padrão de velocidade dos novos inimigos: a última velocidade aplicada no Inspector passa a ser usada como velocidade padrão ao criar os próximos.
