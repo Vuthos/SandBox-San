@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.1 — acesso direto pelo GitHub Pages
+
+- Link principal do README agora abre o editor publicado, sem download.
+- Link direto para o catálogo da comunidade.
+- Instruções de uso priorizam a versão online; o `index.html` standalone continua disponível para uso offline.
+
 ## v1.2.0 — SandBox Online Foundation
 
 - Links jogáveis com fase compactada dentro da URL.
