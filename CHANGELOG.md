@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.5 — runtime standalone
+
+- Runtime JavaScript embutido no `index.html`.
+- Corrigido o canvas vazio ao abrir somente o arquivo HTML fora da árvore completa do projeto.
+- `index.html` agora não depende de `<script src>` externos para funcionar offline.
+- Estrutura modular em `src/` continua preservada como código-fonte.
+
 ## v1.1.4 — correção visual e distribuição
 
 - CSS principal embutido no `index.html` para evitar abertura sem estilos.
