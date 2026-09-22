@@ -20,8 +20,20 @@ A versão offline não possui backend, autenticação, banco remoto, tokens ou e
 Uma futura versão online precisará também de validação no servidor, autenticação, autorização, rate limiting e moderação.
 
 
-## Camada online v1.2.0
+## Camada online v1.2.2
 
-A v1.2.0 introduz compartilhamento por URL e leitura pública da API do GitHub. Um mapa vindo de link passa novamente pelos limites de tamanho/estrutura e pela normalização antes de ser carregado. O catálogo não renderiza HTML fornecido por usuários: títulos e autores são inseridos como texto.
+A v1.2.2 introduz compartilhamento por URL e leitura pública da API do GitHub. Um mapa vindo de link passa novamente pelos limites de tamanho/estrutura e pela normalização antes de ser carregado. O catálogo não renderiza HTML fornecido por usuários: títulos e autores são inseridos como texto.
 
 GitHub Issues é usado como catálogo público nesta etapa, portanto todo conteúdo enviado ali deve ser tratado como não confiável. Uma futura API própria deverá repetir validação no servidor, aplicar autenticação/autorização, rate limiting, moderação e políticas de abuso.
+
+## Hardening da v1.2.2
+
+- o catálogo aceita somente links do domínio e caminho oficiais do SandBox no GitHub Pages;
+- mapas compactados possuem limite durante a descompressão, reduzindo risco de expansão abusiva em memória;
+- editor e catálogo recebem uma CSP que restringe scripts, objetos e conexões externas;
+- o workflow de Pages usa Actions fixadas por commit SHA e timeout de 10 minutos;
+- o frontend continua sem senhas, tokens ou segredos embutidos.
+
+### Limite atual da CSP
+
+O `index.html` standalone ainda embute JavaScript e CSS, então a CSP precisa permitir `'unsafe-inline'` para esses dois tipos de recurso. Isso ainda bloqueia várias classes de carregamento externo, mas uma futura separação total de assets permitirá uma política mais estrita.

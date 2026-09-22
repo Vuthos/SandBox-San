@@ -1,6 +1,6 @@
-# SandBox Online — v1.2.1
+# SandBox Online — v1.2.2
 
-A v1.2.1 inicia a camada comunitária do SandBox sem exigir um servidor privado.
+A v1.2.2 inicia a camada comunitária do SandBox sem exigir um servidor privado.
 
 ## O que funciona
 
@@ -27,3 +27,7 @@ O workflow em `.github/workflows/pages.yml` prepara deploy por GitHub Pages. Nas
 URL planejada:
 
 `https://vuthos.github.io/SandBox-San/`
+
+## Hardening da v1.2.2
+
+A URL de uma fase pública precisa pertencer ao Pages oficial do projeto. O payload compartilhado também é limitado enquanto é descompactado, antes do parsing do JSON. O deploy usa dependências do GitHub Actions fixadas por SHA.

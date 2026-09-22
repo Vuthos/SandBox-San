@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.2.2 — Security Hardening
+
+- Catálogo aceita apenas links oficiais de `https://vuthos.github.io/SandBox-San/`.
+- Limite aplicado durante a descompressão de fases compartilhadas.
+- CSP adicionada ao editor e ao catálogo.
+- GitHub Actions de Pages fixadas por commit SHA.
+- `actions/checkout` atualizado para v5 e `upload-pages-artifact` para v4.
+- Timeout de 10 minutos no job de deploy.
+
 ## v1.2.1 — acesso direto pelo GitHub Pages
 
 - Link principal do README agora abre o editor publicado, sem download.

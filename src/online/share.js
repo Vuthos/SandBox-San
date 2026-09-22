@@ -19,6 +19,30 @@ function base64UrlToBytes(value){
   return out;
 }
 
+async function readStreamWithLimit(stream,maxBytes){
+  const reader=stream.getReader(),chunks=[];
+  let total=0;
+  try{
+    while(true){
+      const {done,value}=await reader.read();
+      if(done)break;
+      if(!(value instanceof Uint8Array))throw new Error('Fluxo compactado inválido.');
+      total+=value.byteLength;
+      if(total>maxBytes){
+        await reader.cancel();
+        throw new Error('Fase compartilhada excede o limite após descompactação.');
+      }
+      chunks.push(value);
+    }
+  }finally{
+    try{reader.releaseLock();}catch{}
+  }
+  const out=new Uint8Array(total);
+  let offset=0;
+  for(const chunk of chunks){out.set(chunk,offset);offset+=chunk.byteLength;}
+  return out;
+}
+
 async function gzipBytes(bytes){
   if(typeof CompressionStream!=='function')return null;
   const stream=new Blob([bytes]).stream().pipeThrough(new CompressionStream('gzip'));
@@ -28,13 +52,14 @@ async function gzipBytes(bytes){
 async function gunzipBytes(bytes){
   if(typeof DecompressionStream!=='function')throw new Error('Este navegador não suporta links compactados.');
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+  return readStreamWithLimit(stream,ONLINE_CONFIG.maxSharedDecodedBytes);
 }
 
 async function encodeSharedMap(mapValue){
   assertMapInputLimits(mapValue);
   const json=JSON.stringify({kind:'san-map',fileFormat:7,map:mapValue});
   const raw=new TextEncoder().encode(json);
+  if(raw.byteLength>ONLINE_CONFIG.maxSharedDecodedBytes)throw new Error('Esta fase excede o limite seguro para compartilhamento.');
   const gz=await gzipBytes(raw);
   const packed=gz&&gz.length<raw.length?('g'+bytesToBase64Url(gz)):('r'+bytesToBase64Url(raw));
   const token=ONLINE_CONFIG.sharePrefix+packed;
@@ -52,21 +77,18 @@ async function decodeSharedMap(token){
   if(!payload)throw new Error('Link SAN vazio.');
   let bytes=base64UrlToBytes(payload);
   if(mode==='g')bytes=await gunzipBytes(bytes);
-  else if(mode!=='r')throw new Error('Formato de link SAN desconhecido.');
-  const parsed=parseMapJson(new TextDecoder().decode(bytes));
+  else if(mode==='r'){
+    if(bytes.byteLength>ONLINE_CONFIG.maxSharedDecodedBytes)throw new Error('Fase compartilhada excede o limite permitido.');
+  }else throw new Error('Formato de link SAN desconhecido.');
+  const text=new TextDecoder().decode(bytes);
+  if(text.length>SECURITY.MAX_JSON_CHARS)throw new Error('Fase compartilhada excede o limite de JSON.');
+  const parsed=parseJsonWithLimit(text);
   if(!isRecord(parsed)||parsed.kind!=='san-map'||!isRecord(parsed.map))throw new Error('Conteúdo compartilhado inválido.');
   assertMapInputLimits(parsed.map);
   return parsed.map;
 }
 
 function onlineBaseUrl(){
-  if(location.protocol==='http:'||location.protocol==='https:'){
-    const u=new URL(location.href);
-    u.hash='';
-    u.search='';
-    if(/\/community\/?$/i.test(u.pathname))u.pathname=u.pathname.replace(/community\/?$/i,'');
-    return u.toString();
-  }
   return ONLINE_CONFIG.publicBaseUrl;
 }
 

@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Editor de Mapas San — editor visual de fases em HTML5 Canvas.">
 <meta name="referrer" content="no-referrer">
-<title>Editor de Mapas San v1.2.1</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none';">
+<title>Editor de Mapas San v1.2.2</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAA5e0lEQVR42m29
 d7wkWXEm+kWck1n++u6+bae7p6fHW8ZjBjfC6CHtyGCkFaxgEZJYLTIL+/TE
 W6SfkH4yPCHQIpABaYUEQgIJLYIRAg1mYWC8N93T3l9/b/nMPCfi/XEys+r2
@@ -685,7 +686,7 @@ w1t4CBXjQkvrLEdVjjAFF6MuijrhaEmJQJyrfUd1nXwwArH+/ykXR5CteLaY
 AAAAAElFTkSuQmCC
 " alt="Editor de Mapas San">
       <div><h1>Editor de Mapas San</h1><div class="sub">Editor online de fases</div></div>
-      <span class="pill">v1.2.1</span><span class="pill onlinePill">ONLINE BETA</span>
+      <span class="pill">v1.2.2</span><span class="pill onlinePill">ONLINE BETA</span>
     </div>
     <div class="actions">
       <button id="editBtn" class="active">✏ Editar</button>
@@ -964,7 +965,7 @@ AAAAAElFTkSuQmCC
         <button id="loadTextBtn">Carregar da caixa</button>
       </div>
       <textarea id="jsonArea" spellcheck="false"></textarea>
-      <div class="note">Editor v1.2.1 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
+      <div class="note">Editor v1.2.2 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
     </div>
   </details>
 </div>
@@ -1644,15 +1645,31 @@ addEventListener('keydown',ev=>{const typing=['INPUT','TEXTAREA','SELECT'].inclu
 'use strict';
 
 const ONLINE_CONFIG = Object.freeze({
-  version: '1.2.0',
+  version: '1.2.2',
   publicBaseUrl: 'https://vuthos.github.io/SandBox-San/',
   repository: 'Vuthos/SandBox-San',
   issuesApi: 'https://api.github.com/repos/Vuthos/SandBox-San/issues',
   issuesNewUrl: 'https://github.com/Vuthos/SandBox-San/issues/new',
   sharePrefix: 'san1.',
-  maxShareTokenChars: 180000
+  maxShareTokenChars: 180000,
+  maxSharedDecodedBytes: 2500000
 });
 
+function officialSandboxUrl(){
+  return new URL(ONLINE_CONFIG.publicBaseUrl);
+}
+
+function isOfficialSandboxShareUrl(value){
+  try{
+    const candidate=value instanceof URL?value:new URL(String(value||''));
+    const official=officialSandboxUrl();
+    const cleanPath=p=>p.replace(/\/+$/,'')+'/';
+    return candidate.protocol==='https:' &&
+      candidate.origin===official.origin &&
+      cleanPath(candidate.pathname)===cleanPath(official.pathname) &&
+      candidate.hash.includes('san=');
+  }catch{return false;}
+}
 
 /* src/online/share.js */
 'use strict';
@@ -1676,6 +1693,30 @@ function base64UrlToBytes(value){
   return out;
 }
 
+async function readStreamWithLimit(stream,maxBytes){
+  const reader=stream.getReader(),chunks=[];
+  let total=0;
+  try{
+    while(true){
+      const {done,value}=await reader.read();
+      if(done)break;
+      if(!(value instanceof Uint8Array))throw new Error('Fluxo compactado inválido.');
+      total+=value.byteLength;
+      if(total>maxBytes){
+        await reader.cancel();
+        throw new Error('Fase compartilhada excede o limite após descompactação.');
+      }
+      chunks.push(value);
+    }
+  }finally{
+    try{reader.releaseLock();}catch{}
+  }
+  const out=new Uint8Array(total);
+  let offset=0;
+  for(const chunk of chunks){out.set(chunk,offset);offset+=chunk.byteLength;}
+  return out;
+}
+
 async function gzipBytes(bytes){
   if(typeof CompressionStream!=='function')return null;
   const stream=new Blob([bytes]).stream().pipeThrough(new CompressionStream('gzip'));
@@ -1685,13 +1726,14 @@ async function gzipBytes(bytes){
 async function gunzipBytes(bytes){
   if(typeof DecompressionStream!=='function')throw new Error('Este navegador não suporta links compactados.');
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+  return readStreamWithLimit(stream,ONLINE_CONFIG.maxSharedDecodedBytes);
 }
 
 async function encodeSharedMap(mapValue){
   assertMapInputLimits(mapValue);
   const json=JSON.stringify({kind:'san-map',fileFormat:7,map:mapValue});
   const raw=new TextEncoder().encode(json);
+  if(raw.byteLength>ONLINE_CONFIG.maxSharedDecodedBytes)throw new Error('Esta fase excede o limite seguro para compartilhamento.');
   const gz=await gzipBytes(raw);
   const packed=gz&&gz.length<raw.length?('g'+bytesToBase64Url(gz)):('r'+bytesToBase64Url(raw));
   const token=ONLINE_CONFIG.sharePrefix+packed;
@@ -1709,21 +1751,18 @@ async function decodeSharedMap(token){
   if(!payload)throw new Error('Link SAN vazio.');
   let bytes=base64UrlToBytes(payload);
   if(mode==='g')bytes=await gunzipBytes(bytes);
-  else if(mode!=='r')throw new Error('Formato de link SAN desconhecido.');
-  const parsed=parseMapJson(new TextDecoder().decode(bytes));
+  else if(mode==='r'){
+    if(bytes.byteLength>ONLINE_CONFIG.maxSharedDecodedBytes)throw new Error('Fase compartilhada excede o limite permitido.');
+  }else throw new Error('Formato de link SAN desconhecido.');
+  const text=new TextDecoder().decode(bytes);
+  if(text.length>SECURITY.MAX_JSON_CHARS)throw new Error('Fase compartilhada excede o limite de JSON.');
+  const parsed=parseJsonWithLimit(text);
   if(!isRecord(parsed)||parsed.kind!=='san-map'||!isRecord(parsed.map))throw new Error('Conteúdo compartilhado inválido.');
   assertMapInputLimits(parsed.map);
   return parsed.map;
 }
 
 function onlineBaseUrl(){
-  if(location.protocol==='http:'||location.protocol==='https:'){
-    const u=new URL(location.href);
-    u.hash='';
-    u.search='';
-    if(/\/community\/?$/i.test(u.pathname))u.pathname=u.pathname.replace(/community\/?$/i,'');
-    return u.toString();
-  }
   return ONLINE_CONFIG.publicBaseUrl;
 }
 
@@ -1779,7 +1818,6 @@ async function copyTextSafe(value){
   }
 }
 
-
 /* src/online/community.js */
 'use strict';
 
@@ -1788,6 +1826,7 @@ function sanitizeCommunityText(value,max=120){
 }
 
 function buildCommunityIssueUrl(shareUrl,alias){
+  if(!isOfficialSandboxShareUrl(shareUrl))throw new Error('Somente links oficiais do SandBox podem ser publicados.');
   const levelTitle=sanitizeCommunityText(map.meta?.name||'Fase sem nome',80)||'Fase sem nome';
   const author=sanitizeCommunityText(alias,40)||'Anônimo';
   const title='[SAN LEVEL] '+levelTitle;
@@ -1799,7 +1838,7 @@ function buildCommunityIssueUrl(shareUrl,alias){
     '**Formato:** SAN Map v7',
     '**Link:** '+shareUrl,
     '',
-    '> Envio criado pelo SandBox Editor v1.2.1.'
+    '> Envio criado pelo SandBox Editor v1.2.2.'
   ].join('\n');
   const u=new URL(ONLINE_CONFIG.issuesNewUrl);
   u.searchParams.set('title',title);
@@ -1819,7 +1858,7 @@ function parseCommunityIssue(issue){
   let share;
   try{
     share=new URL(linkMatch[1]);
-    if(!share.hash.includes('san='))return null;
+    if(!isOfficialSandboxShareUrl(share))return null;
   }catch{return null;}
   return {
     issueNumber:Number(issue.number)||0,
@@ -1843,7 +1882,6 @@ async function fetchCommunityLevels(limit=30){
   if(!Array.isArray(raw))return[];
   return raw.map(parseCommunityIssue).filter(Boolean);
 }
-
 
 /* src/online/ui.js */
 'use strict';
@@ -1934,7 +1972,6 @@ async function initializeOnlineFoundation(){
     setCommunityState('Este link de fase não pôde ser aberto.');
   }
 }
-
 
 /* src/app.js */
 'use strict';
