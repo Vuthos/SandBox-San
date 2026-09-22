@@ -8,7 +8,8 @@ A versão offline não possui backend, autenticação, banco remoto, tokens ou e
 - Nome de fase/template: máximo de 80 caracteres.
 - Máximo de 500 inimigos.
 - Máximo de 512 pontos por rota e 10.000 pontos de rota no total.
-- Máximo de 12.000 objetos lógicos.
+- Máximo de 12.000 objetos lógicos no total.
+- Máximo de 9.600 pisos especiais (`floorTiles`), ainda sujeito ao limite total de objetos.
 - Velocidades normalizadas para 1–1000 px/s.
 - Grade limitada a 10–120 colunas e 8–80 linhas.
 - Coordenadas convertidas para números finitos e ajustadas ao Canvas.
@@ -37,3 +38,7 @@ GitHub Issues é usado como catálogo público nesta etapa, portanto todo conte�
 ### Limite atual da CSP
 
 O `index.html` standalone ainda embute JavaScript e CSS, então a CSP precisa permitir `'unsafe-inline'` para esses dois tipos de recurso. Isso ainda bloqueia várias classes de carregamento externo, mas uma futura separação total de assets permitirá uma política mais estrita.
+
+## Superfícies da v1.3.0
+
+Os pisos especiais aceitam somente tipos conhecidos (`ice`, `water` e quatro direções de seta). Coordenadas são normalizadas e pisos fora do mapa são removidos. O cenário aceita somente cores hexadecimais de seis dígitos no formato `#RRGGBB`.
