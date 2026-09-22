@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.1.6 — seleção por área e movimento em grupo
+
+- Seleção retangular (marquee) de múltiplos objetos.
+- Arrastar seleção inteira como um bloco.
+- Ctrl/Shift+clique adiciona/remove itens da seleção.
+- Seleção inclui paredes, inimigos, moedas, checkpoints, portais, chave/porta, botões, início e chegada.
+- Snap de 1–32 px para inimigos/rotas; objetos de grade permanecem em 32 px.
+- Setas do teclado movem a seleção; Shift acelera o deslocamento.
+- Duplicar/copiar foi ampliado para os objetos selecionáveis compatíveis.
+
 ## v1.1.5 — runtime standalone
 
 - Runtime JavaScript embutido no `index.html`.
