@@ -9,3 +9,5 @@ refreshTemplates();
 applyZoom();
 draw();
 document.querySelectorAll('.tool').forEach(btn=>btn.classList.toggle('active',btn.dataset.tool===tool));
+
+initializeOnlineFoundation();
