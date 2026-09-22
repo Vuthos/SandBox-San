@@ -1,6 +1,11 @@
-# SandBox / Editor de Mapas San — v1.2.0
+# SandBox / Editor de Mapas San — v1.2.1
 
-Editor visual de fases 2D em HTML5 Canvas. A v1.2.0 adiciona a primeira camada comunitária online sem abandonar o formato **SAN Map v7**, o modo standalone e o hardening de mapas JSON.
+**▶ [Abrir o Editor Online](https://vuthos.github.io/SandBox-San/)**  
+**🌐 [Explorar fases da comunidade](https://vuthos.github.io/SandBox-San/community/)**
+
+> Para usar o SandBox, não é necessário baixar o `index.html`. O link acima abre diretamente a versão publicada pelo GitHub Pages.
+
+Editor visual de fases 2D em HTML5 Canvas. A v1.2.1 mantém a primeira camada comunitária online e melhora o acesso direto pelo GitHub Pages sem abandonar o formato **SAN Map v7**, o modo standalone e o hardening de mapas JSON.
 
 ## Estrutura
 
@@ -32,7 +37,11 @@ Leia `SECURITY.md` para os limites atuais.
 
 ## Executar
 
-Abra `index.html` em um navegador moderno ou publique a raiz no GitHub Pages. Não há etapa de build nem dependência externa.
+### Online — recomendado
+Acesse **https://vuthos.github.io/SandBox-San/**. O editor abre direto no navegador pelo GitHub Pages, sem download.
+
+### Offline
+Se quiser usar sem internet, aí sim baixe o projeto ou o `index.html` standalone e abra em um navegador moderno. Não há etapa de build nem dependência externa.
 
 ## Filosofia
 
