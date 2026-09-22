@@ -6,7 +6,7 @@
 <meta name="description" content="Editor de Mapas San — editor visual de fases em HTML5 Canvas.">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; frame-ancestors 'none';">
-<title>Editor de Mapas San v1.2.2</title>
+<title>Editor de Mapas San v1.3.0</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAA5e0lEQVR42m29
 d7wkWXEm+kWck1n++u6+bae7p6fHW8ZjBjfC6CHtyGCkFaxgEZJYLTIL+/TE
 W6SfkH4yPCHQIpABaYUEQgIJLYIRAg1mYWC8N93T3l9/b/nMPCfi/XEys+r2
@@ -686,7 +686,7 @@ w1t4CBXjQkvrLEdVjjAFF6MuijrhaEmJQJyrfUd1nXwwArH+/ykXR5CteLaY
 AAAAAElFTkSuQmCC
 " alt="Editor de Mapas San">
       <div><h1>Editor de Mapas San</h1><div class="sub">Editor online de fases</div></div>
-      <span class="pill">v1.2.2</span><span class="pill onlinePill">ONLINE BETA</span>
+      <span class="pill">v1.3.0</span><span class="pill onlinePill">ONLINE BETA</span>
     </div>
     <div class="actions">
       <button id="editBtn" class="active">✏ Editar</button>
@@ -752,6 +752,18 @@ AAAAAElFTkSuQmCC
       </details>
 
       <details class="group" open>
+        <summary>Cenário e pisos</summary>
+        <div class="toolList">
+          <button class="tool" data-tool="floor-ice">🧊 Gelo</button>
+          <button class="tool" data-tool="floor-water">💧 Água</button>
+          <button class="tool" data-tool="floor-arrow-up">⬆ Seta para cima</button>
+          <button class="tool" data-tool="floor-arrow-down">⬇ Seta para baixo</button>
+          <button class="tool" data-tool="floor-arrow-left">⬅ Seta para esquerda</button>
+          <button class="tool" data-tool="floor-arrow-right">➡ Seta para direita</button>
+        </div>
+      </details>
+
+      <details class="group" open>
         <summary>Inimigos</summary>
         <div class="toolList">
           <button class="tool" data-tool="static">🔴 Parado</button>
@@ -804,6 +816,17 @@ AAAAAElFTkSuQmCC
           <label>Nome da fase</label>
           <input id="levelName" maxlength="80" value="Nova fase">
         </div>
+
+        <details class="group" open>
+          <summary>Cenário</summary>
+          <div style="padding:0 2px 8px">
+            <div class="row2">
+              <div class="field"><label>Cor do xadrez</label><input id="backgroundColor" type="color" value="#d9e6ff"></div>
+              <div class="field"><label>Hexadecimal</label><input id="backgroundHex" maxlength="7" value="#d9e6ff" placeholder="#d9e6ff"></div>
+            </div>
+            <div class="note">O fundo alterna branco com a cor escolhida. É apenas visual e não cria objetos extras.</div>
+          </div>
+        </details>
 
         <div class="row2">
           <div class="field"><label>Snap de rota</label>
@@ -965,7 +988,7 @@ AAAAAElFTkSuQmCC
         <button id="loadTextBtn">Carregar da caixa</button>
       </div>
       <textarea id="jsonArea" spellcheck="false"></textarea>
-      <div class="note">Editor v1.2.2 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
+      <div class="note">Editor v1.3.0 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
     </div>
   </details>
 </div>
@@ -1838,7 +1861,7 @@ function buildCommunityIssueUrl(shareUrl,alias){
     '**Formato:** SAN Map v7',
     '**Link:** '+shareUrl,
     '',
-    '> Envio criado pelo SandBox Editor v1.2.2.'
+    '> Envio criado pelo SandBox Editor v1.3.0.'
   ].join('\n');
   const u=new URL(ONLINE_CONFIG.issuesNewUrl);
   u.searchParams.set('title',title);
