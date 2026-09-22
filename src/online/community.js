@@ -5,6 +5,7 @@ function sanitizeCommunityText(value,max=120){
 }
 
 function buildCommunityIssueUrl(shareUrl,alias){
+  if(!isOfficialSandboxShareUrl(shareUrl))throw new Error('Somente links oficiais do SandBox podem ser publicados.');
   const levelTitle=sanitizeCommunityText(map.meta?.name||'Fase sem nome',80)||'Fase sem nome';
   const author=sanitizeCommunityText(alias,40)||'Anônimo';
   const title='[SAN LEVEL] '+levelTitle;
@@ -16,7 +17,7 @@ function buildCommunityIssueUrl(shareUrl,alias){
     '**Formato:** SAN Map v7',
     '**Link:** '+shareUrl,
     '',
-    '> Envio criado pelo SandBox Editor v1.2.0.'
+    '> Envio criado pelo SandBox Editor v1.2.2.'
   ].join('\n');
   const u=new URL(ONLINE_CONFIG.issuesNewUrl);
   u.searchParams.set('title',title);
@@ -36,7 +37,7 @@ function parseCommunityIssue(issue){
   let share;
   try{
     share=new URL(linkMatch[1]);
-    if(!share.hash.includes('san='))return null;
+    if(!isOfficialSandboxShareUrl(share))return null;
   }catch{return null;}
   return {
     issueNumber:Number(issue.number)||0,
