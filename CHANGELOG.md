@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.4 — correção visual e distribuição
+
+- CSS principal embutido no `index.html` para evitar abertura sem estilos.
+- Ícone embutido no `index.html` para evitar imagem quebrada quando o arquivo é aberto isoladamente.
+- Estrutura modular continua preservada em `styles/`, `assets/` e `src/`.
+
 ## v1.1.3 — hardening e publicação modular
 
 - Adicionado `src/core/security.js`.
