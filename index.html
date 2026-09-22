@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Editor de Mapas San — editor visual de fases em HTML5 Canvas.">
 <meta name="referrer" content="no-referrer">
-<title>Editor de Mapas San v1.2.0</title>
+<title>Editor de Mapas San v1.2.1</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAA5e0lEQVR42m29
 d7wkWXEm+kWck1n++u6+bae7p6fHW8ZjBjfC6CHtyGCkFaxgEZJYLTIL+/TE
 W6SfkH4yPCHQIpABaYUEQgIJLYIRAg1mYWC8N93T3l9/b/nMPCfi/XEys+r2
@@ -685,7 +685,7 @@ w1t4CBXjQkvrLEdVjjAFF6MuijrhaEmJQJyrfUd1nXwwArH+/ykXR5CteLaY
 AAAAAElFTkSuQmCC
 " alt="Editor de Mapas San">
       <div><h1>Editor de Mapas San</h1><div class="sub">Editor online de fases</div></div>
-      <span class="pill">v1.2.0</span><span class="pill onlinePill">ONLINE BETA</span>
+      <span class="pill">v1.2.1</span><span class="pill onlinePill">ONLINE BETA</span>
     </div>
     <div class="actions">
       <button id="editBtn" class="active">✏ Editar</button>
@@ -964,7 +964,7 @@ AAAAAElFTkSuQmCC
         <button id="loadTextBtn">Carregar da caixa</button>
       </div>
       <textarea id="jsonArea" spellcheck="false"></textarea>
-      <div class="note">Editor v1.2.0 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
+      <div class="note">Editor v1.2.1 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
     </div>
   </details>
 </div>
@@ -1799,7 +1799,7 @@ function buildCommunityIssueUrl(shareUrl,alias){
     '**Formato:** SAN Map v7',
     '**Link:** '+shareUrl,
     '',
-    '> Envio criado pelo SandBox Editor v1.2.0.'
+    '> Envio criado pelo SandBox Editor v1.2.1.'
   ].join('\n');
   const u=new URL(ONLINE_CONFIG.issuesNewUrl);
   u.searchParams.set('title',title);
