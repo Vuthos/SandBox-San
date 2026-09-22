@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.2.0 — SandBox Online Foundation
+
+- Links jogáveis com fase compactada dentro da URL.
+- Abertura automática de fase compartilhada por link.
+- Painel **SandBox Online** no editor.
+- Catálogo público em `community/`.
+- Publicação comunitária assistida via GitHub Issues.
+- Preparação de deploy via GitHub Pages.
+- Validação e limites de segurança continuam sendo aplicados ao conteúdo compartilhado.
+- Nova camada modular em `src/online/`.
+
 ## v1.1.6 — seleção por área e movimento em grupo
 
 - Seleção retangular (marquee) de múltiplos objetos.

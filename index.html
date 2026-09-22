@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Editor de Mapas San — editor visual de fases em HTML5 Canvas.">
 <meta name="referrer" content="no-referrer">
-<title>Editor de Mapas San v1.1.6</title>
+<title>Editor de Mapas San v1.2.0</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAA5e0lEQVR42m29
 d7wkWXEm+kWck1n++u6+bae7p6fHW8ZjBjfC6CHtyGCkFaxgEZJYLTIL+/TE
 W6SfkH4yPCHQIpABaYUEQgIJLYIRAg1mYWC8N93T3l9/b/nMPCfi/XEys+r2
@@ -339,6 +339,15 @@ AAAAAElFTkSuQmCC
 <style>
 :root{--bg:#0f131b;--panel:#171d28;--panel2:#202838;--panel3:#111722;--line:#303b50;--text:#eef4ff;--muted:#91a0b7;--accent:#4fa3ff;--danger:#c94b55;--ok:#62c985;--warning:#e7cf75}*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}button,input,select{font:inherit}button{border:1px solid transparent;border-radius:8px;background:var(--panel2);color:var(--text);min-height:34px;padding:7px 10px;cursor:pointer}button:hover{filter:brightness(1.08)}button:disabled{opacity:.4;cursor:not-allowed}button.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:#263b56}button.primary{background:#176fc1}button.danger{background:#672d35}input,select{width:100%;border:1px solid var(--line);border-radius:7px;background:#0d131d;color:var(--text);padding:7px 8px}input[type=checkbox]{width:auto;accent-color:#4fa3ff}input[type=range]{padding:0}.app{max-width:1660px;margin:auto;padding:12px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:9px 11px;margin-bottom:10px}.brand{display:flex;align-items:center;gap:10px;min-width:240px}.brand img{width:40px;height:40px;border-radius:9px}.brand h1{font-size:18px;margin:0}.brand .sub{font-size:12px;color:var(--muted);margin-top:2px}.actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.pill{font-size:11px;color:#bed0e9;background:#0e1622;border:1px solid var(--line);border-radius:999px;padding:4px 8px}.workspace{display:grid;grid-template-columns:218px minmax(0,1fr) 310px;gap:10px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.panelTitle{padding:10px 11px;border-bottom:1px solid var(--line);font-size:13px;font-weight:700}.panelBody{padding:9px}details.group{border-bottom:1px solid #242d3d}details.group:last-child{border-bottom:0}details.group summary{list-style:none;cursor:pointer;padding:9px 10px;font-size:12px;font-weight:700;color:#c9d5e5;display:flex;align-items:center;justify-content:space-between}details.group summary::-webkit-details-marker{display:none}details.group summary::after{content:"▾";color:var(--muted)}details.group:not([open]) summary::after{content:"▸"}.toolList{display:grid;gap:5px;padding:0 8px 9px}.tool{width:100%;text-align:left;font-size:12px;min-height:32px}.tool small{color:var(--muted)}.canvasPanel{padding:8px;overflow:auto;background:#111722}.canvasTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:12px;color:var(--muted)}.canvasWrap{width:max-content;min-width:100%}canvas{display:block;background:#f4f4f4;border:1px solid #07090d;border-radius:3px;touch-action:none}.statusbar{margin-top:7px;border-top:1px solid var(--line);padding-top:7px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}.statusMain{color:#d5e0ef}.field{margin-bottom:10px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:7px}.rowBtns{display:flex;gap:6px;flex-wrap:wrap}.rowBtns button{flex:1;min-width:90px}.note{font-size:11px;color:var(--muted);line-height:1.4}.sep{height:1px;background:var(--line);margin:10px 0}.hidden{display:none!important}.selectionTitle{font-size:12px;background:#0e1622;border:1px solid var(--line);border-radius:8px;padding:7px 8px;margin-bottom:9px}.toggleLine{display:flex;align-items:flex-start;gap:8px;margin:7px 0;font-size:12px;color:#cbd6e5}.routeTag{display:inline-block;font-size:10px;color:#dbc8ef;background:#31203f;border:1px solid #58336f;border-radius:999px;padding:3px 7px;margin-top:3px}.bottomPanel{margin-top:10px}.bottomPanel summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:700}.jsonInner{padding:0 10px 10px}textarea{width:100%;min-height:115px;resize:vertical;border:1px solid var(--line);border-radius:8px;background:#090e16;color:#dce7f8;padding:8px;font:12px Consolas,monospace}kbd{background:#0d131d;border:1px solid #39445a;border-bottom-width:2px;border-radius:4px;padding:1px 4px;font-size:10px}@media(max-width:1180px){.workspace{grid-template-columns:205px minmax(0,1fr)}.inspector{grid-column:1/-1}}@media(max-width:760px){.workspace{grid-template-columns:1fr}.tools,.inspector{grid-column:auto}.topbar{align-items:flex-start;flex-direction:column}.actions{justify-content:flex-start}}
 
+</style>
+
+<style>
+.communityPanel{margin:0 0 10px;background:linear-gradient(180deg,#182436,#131b27);border:1px solid #35506f;border-radius:12px;padding:12px}
+.communityHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.communityHead h2{font-size:16px;margin:0 0 3px}.communityGrid{display:grid;grid-template-columns:220px minmax(260px,1fr);gap:10px}
+.communityShareRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}.communityState{margin-top:8px;color:#b8cbe2}
+.onlinePill{color:#bcebd0;border-color:#355f4a;background:#10271d}
+@media(max-width:760px){.communityGrid{grid-template-columns:1fr}.communityShareRow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -676,7 +685,7 @@ w1t4CBXjQkvrLEdVjjAFF6MuijrhaEmJQJyrfUd1nXwwArH+/ykXR5CteLaY
 AAAAAElFTkSuQmCC
 " alt="Editor de Mapas San">
       <div><h1>Editor de Mapas San</h1><div class="sub">Editor offline de fases</div></div>
-      <span class="pill">v1.1.6</span><span class="pill">OFFLINE</span>
+      <span class="pill">v1.2.0</span><span class="pill onlinePill">ONLINE BETA</span>
     </div>
     <div class="actions">
       <button id="editBtn" class="active">✏ Editar</button>
@@ -691,12 +700,39 @@ AAAAAElFTkSuQmCC
       <button id="copyBtn" title="Ctrl+C">Copiar</button>
       <button id="pasteBtn" title="Ctrl+V">Colar</button>
       <button id="validateBtn">Validar</button>
+      <button id="communityBtn" class="primary">🌐 Comunidade</button>
       <button id="zoomOutBtn" title="Diminuir zoom">−</button>
       <button id="zoomResetBtn" title="Resetar zoom">100%</button>
       <button id="zoomInBtn" title="Aumentar zoom">+</button>
       <input id="fileInput" type="file" accept=".json,application/json" hidden>
     </div>
   </header>
+
+  <section id="communityPanel" class="communityPanel hidden">
+    <div class="communityHead">
+      <div><h2>🌐 SandBox Online</h2><div class="note">Compartilhe esta fase por link ou envie para o catálogo comunitário.</div></div>
+      <button id="closeCommunityBtn">Fechar</button>
+    </div>
+    <div class="communityGrid">
+      <div class="field">
+        <label>Seu nome público</label>
+        <input id="communityAlias" maxlength="40" placeholder="Ex.: Jossan">
+      </div>
+      <div class="field">
+        <label>Link desta fase</label>
+        <div class="communityShareRow">
+          <input id="communityShareUrl" readonly placeholder="Clique em Criar link">
+          <button id="copyShareBtn" disabled>Copiar</button>
+        </div>
+      </div>
+    </div>
+    <div class="rowBtns">
+      <button id="createShareBtn" class="primary">Criar link jogável</button>
+      <button id="submitCommunityBtn" disabled>Enviar à comunidade</button>
+      <button id="openCommunityBtn">Explorar fases</button>
+    </div>
+    <div id="communityState" class="note communityState">A fase continua sendo sua. O link contém uma cópia do mapa.</div>
+  </section>
 
   <main class="workspace">
     <aside class="panel tools">
@@ -928,7 +964,7 @@ AAAAAElFTkSuQmCC
         <button id="loadTextBtn">Carregar da caixa</button>
       </div>
       <textarea id="jsonArea" spellcheck="false"></textarea>
-      <div class="note">Editor v1.1.6 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
+      <div class="note">Editor v1.2.0 • Formato SAN Map v7. Mapas v2/v3/v4/v5/v6 são convertidos ao abrir.</div>
     </div>
   </details>
 </div>
@@ -1604,6 +1640,302 @@ addEventListener('keydown',ev=>{const typing=['INPUT','TEXTAREA','SELECT'].inclu
 'use strict';function restoreDraft(){try{const s=localStorage.getItem('sanMapEditorV11Draft')||localStorage.getItem('sanMapEditorV7Draft')||localStorage.getItem('sanMapEditorV6Draft')||localStorage.getItem('sanMapEditorV5Draft');if(s){normalizeMap(parseMapJson(s));return true;}}catch{try{localStorage.removeItem('sanMapEditorV11Draft');}catch{}}return false;}
 
 
+/* src/online/config.js */
+'use strict';
+
+const ONLINE_CONFIG = Object.freeze({
+  version: '1.2.0',
+  publicBaseUrl: 'https://vuthos.github.io/SandBox-San/',
+  repository: 'Vuthos/SandBox-San',
+  issuesApi: 'https://api.github.com/repos/Vuthos/SandBox-San/issues',
+  issuesNewUrl: 'https://github.com/Vuthos/SandBox-San/issues/new',
+  sharePrefix: 'san1.',
+  maxShareTokenChars: 180000
+});
+
+
+/* src/online/share.js */
+'use strict';
+
+function bytesToBase64Url(bytes){
+  let binary='';
+  const CHUNK=0x8000;
+  for(let i=0;i<bytes.length;i+=CHUNK){
+    const slice=bytes.subarray(i,Math.min(bytes.length,i+CHUNK));
+    binary+=String.fromCharCode(...slice);
+  }
+  return btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+
+function base64UrlToBytes(value){
+  const normalized=value.replace(/-/g,'+').replace(/_/g,'/');
+  const padded=normalized+'='.repeat((4-normalized.length%4)%4);
+  const binary=atob(padded);
+  const out=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++)out[i]=binary.charCodeAt(i);
+  return out;
+}
+
+async function gzipBytes(bytes){
+  if(typeof CompressionStream!=='function')return null;
+  const stream=new Blob([bytes]).stream().pipeThrough(new CompressionStream('gzip'));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function gunzipBytes(bytes){
+  if(typeof DecompressionStream!=='function')throw new Error('Este navegador não suporta links compactados.');
+  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function encodeSharedMap(mapValue){
+  assertMapInputLimits(mapValue);
+  const json=JSON.stringify({kind:'san-map',fileFormat:7,map:mapValue});
+  const raw=new TextEncoder().encode(json);
+  const gz=await gzipBytes(raw);
+  const packed=gz&&gz.length<raw.length?('g'+bytesToBase64Url(gz)):('r'+bytesToBase64Url(raw));
+  const token=ONLINE_CONFIG.sharePrefix+packed;
+  if(token.length>ONLINE_CONFIG.maxShareTokenChars){
+    throw new Error('Esta fase ficou grande demais para um link. Exporte o JSON até o catálogo com backend estar ativo.');
+  }
+  return token;
+}
+
+async function decodeSharedMap(token){
+  if(typeof token!=='string'||!token.startsWith(ONLINE_CONFIG.sharePrefix))throw new Error('Link SAN inválido.');
+  const body=token.slice(ONLINE_CONFIG.sharePrefix.length);
+  if(body.length>ONLINE_CONFIG.maxShareTokenChars)throw new Error('Link SAN excede o limite permitido.');
+  const mode=body.charAt(0),payload=body.slice(1);
+  if(!payload)throw new Error('Link SAN vazio.');
+  let bytes=base64UrlToBytes(payload);
+  if(mode==='g')bytes=await gunzipBytes(bytes);
+  else if(mode!=='r')throw new Error('Formato de link SAN desconhecido.');
+  const parsed=parseMapJson(new TextDecoder().decode(bytes));
+  if(!isRecord(parsed)||parsed.kind!=='san-map'||!isRecord(parsed.map))throw new Error('Conteúdo compartilhado inválido.');
+  assertMapInputLimits(parsed.map);
+  return parsed.map;
+}
+
+function onlineBaseUrl(){
+  if(location.protocol==='http:'||location.protocol==='https:'){
+    const u=new URL(location.href);
+    u.hash='';
+    u.search='';
+    if(/\/community\/?$/i.test(u.pathname))u.pathname=u.pathname.replace(/community\/?$/i,'');
+    return u.toString();
+  }
+  return ONLINE_CONFIG.publicBaseUrl;
+}
+
+async function buildShareUrl(options){
+  options=options||{};
+  const token=await encodeSharedMap(cloneJson(map));
+  const u=new URL(onlineBaseUrl());
+  u.searchParams.set('shared','1');
+  if(options.play!==false)u.searchParams.set('play','1');
+  u.hash='san='+token;
+  return u.toString();
+}
+
+function sharedTokenFromLocation(){
+  const hash=location.hash.startsWith('#')?location.hash.slice(1):location.hash;
+  const params=new URLSearchParams(hash);
+  return params.get('san')||'';
+}
+
+async function loadSharedMapFromLocation(){
+  const token=sharedTokenFromLocation();
+  if(!token)return false;
+  const incoming=await decodeSharedMap(token);
+  normalizeMap(incoming);
+  clearPending();
+  clearSelection();
+  syncDocumentControls();
+  resetHistory();
+  resizeCanvas();
+  applyZoom();
+  draw();
+  runValidation(false);
+  if(new URLSearchParams(location.search).get('play')==='1')setMode('test');
+  setStatus('Fase compartilhada carregada.');
+  return true;
+}
+
+async function copyTextSafe(value){
+  try{
+    await navigator.clipboard.writeText(value);
+    return true;
+  }catch{
+    const ta=document.createElement('textarea');
+    ta.value=value;
+    ta.setAttribute('readonly','');
+    ta.style.position='fixed';
+    ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok=document.execCommand('copy');
+    ta.remove();
+    return ok;
+  }
+}
+
+
+/* src/online/community.js */
+'use strict';
+
+function sanitizeCommunityText(value,max=120){
+  return cleanText(String(value||''),max,'');
+}
+
+function buildCommunityIssueUrl(shareUrl,alias){
+  const levelTitle=sanitizeCommunityText(map.meta?.name||'Fase sem nome',80)||'Fase sem nome';
+  const author=sanitizeCommunityText(alias,40)||'Anônimo';
+  const title='[SAN LEVEL] '+levelTitle;
+  const body=[
+    '<!-- SAN-COMMUNITY-LEVEL -->',
+    '',
+    '**Fase:** '+levelTitle,
+    '**Autor:** '+author,
+    '**Formato:** SAN Map v7',
+    '**Link:** '+shareUrl,
+    '',
+    '> Envio criado pelo SandBox Editor v1.2.0.'
+  ].join('\n');
+  const u=new URL(ONLINE_CONFIG.issuesNewUrl);
+  u.searchParams.set('title',title);
+  u.searchParams.set('body',body);
+  return u.toString();
+}
+
+function parseCommunityIssue(issue){
+  if(!issue||issue.pull_request||issue.state!=='open')return null;
+  if(!String(issue.title||'').startsWith('[SAN LEVEL]'))return null;
+  const body=String(issue.body||'');
+  if(!body.includes('SAN-COMMUNITY-LEVEL'))return null;
+  const linkMatch=body.match(/\*\*Link:\*\*\s+(https?:\/\/\S+)/i);
+  if(!linkMatch)return null;
+  const authorMatch=body.match(/\*\*Autor:\*\*\s+([^\n\r]+)/i);
+  const levelMatch=body.match(/\*\*Fase:\*\*\s+([^\n\r]+)/i);
+  let share;
+  try{
+    share=new URL(linkMatch[1]);
+    if(!share.hash.includes('san='))return null;
+  }catch{return null;}
+  return {
+    issueNumber:Number(issue.number)||0,
+    title:sanitizeCommunityText(levelMatch?.[1]||String(issue.title).replace(/^\[SAN LEVEL\]\s*/,''),80)||'Fase',
+    author:sanitizeCommunityText(authorMatch?.[1]||issue.user?.login||'Comunidade',40)||'Comunidade',
+    shareUrl:share.toString(),
+    createdAt:String(issue.created_at||''),
+    issueUrl:String(issue.html_url||'')
+  };
+}
+
+async function fetchCommunityLevels(limit=30){
+  const u=new URL(ONLINE_CONFIG.issuesApi);
+  u.searchParams.set('state','open');
+  u.searchParams.set('per_page',String(clamp(Number(limit)||30,1,50)));
+  u.searchParams.set('sort','created');
+  u.searchParams.set('direction','desc');
+  const response=await fetch(u.toString(),{headers:{'Accept':'application/vnd.github+json'}});
+  if(!response.ok)throw new Error('GitHub respondeu '+response.status+'.');
+  const raw=await response.json();
+  if(!Array.isArray(raw))return[];
+  return raw.map(parseCommunityIssue).filter(Boolean);
+}
+
+
+/* src/online/ui.js */
+'use strict';
+
+let lastShareUrl='';
+
+function onlineEls(){
+  return {
+    panel:$('communityPanel'),
+    alias:$('communityAlias'),
+    shareUrl:$('communityShareUrl'),
+    shareBtn:$('createShareBtn'),
+    copyBtn:$('copyShareBtn'),
+    submitBtn:$('submitCommunityBtn'),
+    exploreBtn:$('openCommunityBtn'),
+    closeBtn:$('closeCommunityBtn'),
+    topBtn:$('communityBtn'),
+    onlineState:$('communityState')
+  };
+}
+
+function setCommunityState(message){
+  const el=$('communityState');
+  if(el)el.textContent=message;
+}
+
+function saveCommunityAlias(){
+  const el=$('communityAlias');
+  if(!el)return;
+  const safe=sanitizeCommunityText(el.value,40);
+  el.value=safe;
+  try{localStorage.setItem('sanCommunityAlias',safe);}catch{}
+}
+
+async function createCurrentShareLink(){
+  const el=onlineEls();
+  setCommunityState('Compactando a fase...');
+  try{
+    lastShareUrl=await buildShareUrl({play:true});
+    if(el.shareUrl)el.shareUrl.value=lastShareUrl;
+    if(el.copyBtn)el.copyBtn.disabled=false;
+    if(el.submitBtn)el.submitBtn.disabled=false;
+    setCommunityState('Link pronto. Quem abrir recebe uma cópia desta fase e entra no teste.');
+    return lastShareUrl;
+  }catch(e){
+    setCommunityState('Não foi possível criar o link: '+(e?.message||'erro desconhecido'));
+    return '';
+  }
+}
+
+function communityCatalogUrl(){
+  return new URL('community/',onlineBaseUrl()).toString();
+}
+
+async function initializeOnlineFoundation(){
+  const el=onlineEls();
+  if(el.alias){
+    try{el.alias.value=sanitizeCommunityText(localStorage.getItem('sanCommunityAlias')||'',40);}catch{}
+    el.alias.addEventListener('change',saveCommunityAlias);
+  }
+  el.topBtn?.addEventListener('click',()=>{
+    el.panel?.classList.toggle('hidden');
+    if(!el.panel?.classList.contains('hidden'))el.panel?.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  el.closeBtn?.addEventListener('click',()=>el.panel?.classList.add('hidden'));
+  el.shareBtn?.addEventListener('click',createCurrentShareLink);
+  el.copyBtn?.addEventListener('click',async()=>{
+    const value=el.shareUrl?.value||lastShareUrl;
+    if(!value)return;
+    const ok=await copyTextSafe(value);
+    setCommunityState(ok?'Link copiado.':'Não consegui copiar automaticamente; selecione o campo e copie.');
+  });
+  el.submitBtn?.addEventListener('click',async()=>{
+    saveCommunityAlias();
+    const link=(el.shareUrl?.value||lastShareUrl)||await createCurrentShareLink();
+    if(!link)return;
+    const issueUrl=buildCommunityIssueUrl(link,el.alias?.value||'');
+    window.open(issueUrl,'_blank','noopener,noreferrer');
+    setCommunityState('Envio aberto no GitHub. Depois de enviar, a fase pode aparecer no catálogo público.');
+  });
+  el.exploreBtn?.addEventListener('click',()=>window.open(communityCatalogUrl(),'_blank','noopener,noreferrer'));
+
+  try{
+    const loaded=await loadSharedMapFromLocation();
+    if(loaded)el.panel?.classList.remove('hidden');
+  }catch(e){
+    setStatus('Falha ao abrir fase compartilhada: '+(e?.message||'link inválido.'));
+    setCommunityState('Este link de fase não pôde ser aberto.');
+  }
+}
+
+
 /* src/app.js */
 'use strict';
 restoreDraft();
@@ -1616,6 +1948,8 @@ refreshTemplates();
 applyZoom();
 draw();
 document.querySelectorAll('.tool').forEach(btn=>btn.classList.toggle('active',btn.dataset.tool===tool));
+
+initializeOnlineFoundation();
 
 </script>
 </body>

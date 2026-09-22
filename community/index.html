@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Catálogo comunitário de fases do SandBox San.">
+<meta name="referrer" content="no-referrer">
+<title>SandBox Comunidade</title>
+<link rel="stylesheet" href="../styles/main.css">
+<style>
+.catalog{max-width:1100px;margin:0 auto;padding:22px}.catalogHead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.catalogHead h1{margin:0}.levelGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}.levelCard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.levelCard h2{font-size:17px;margin:0 0 6px}.levelMeta{font-size:12px;color:var(--muted);margin-bottom:12px}.levelCard .rowBtns a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:8px;background:#176fc1;color:#fff;padding:8px 10px;min-height:34px}.emptyState{border:1px dashed var(--line);border-radius:12px;padding:26px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="catalog">
+  <div class="catalogHead">
+    <div>
+      <h1>🌐 SandBox Comunidade</h1>
+      <div class="note">Fases criadas por jogadores e compartilhadas publicamente.</div>
+    </div>
+    <div class="rowBtns">
+      <button id="refreshBtn">Atualizar</button>
+      <button id="editorBtn" class="primary">Abrir editor</button>
+    </div>
+  </div>
+  <div id="catalogState" class="note" style="margin-bottom:12px">Carregando fases...</div>
+  <section id="levelGrid" class="levelGrid" aria-live="polite"></section>
+</main>
+<script>
+'use strict';
+const API='https://api.github.com/repos/Vuthos/SandBox-San/issues';
+const grid=document.getElementById('levelGrid');
+const state=document.getElementById('catalogState');
+function clean(v,max){return String(v||'').replace(/[\u0000-\u001F\u007F]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);}
+function parse(issue){
+  if(!issue||issue.pull_request||issue.state!=='open'||!String(issue.title||'').startsWith('[SAN LEVEL]'))return null;
+  const body=String(issue.body||'');
+  if(!body.includes('SAN-COMMUNITY-LEVEL'))return null;
+  const lm=body.match(/\*\*Link:\*\*\s+(https?:\/\/\S+)/i);
+  if(!lm)return null;
+  let link;
+  try{link=new URL(lm[1]);if(!link.hash.includes('san='))return null;}catch{return null;}
+  const am=body.match(/\*\*Autor:\*\*\s+([^\n\r]+)/i);
+  const tm=body.match(/\*\*Fase:\*\*\s+([^\n\r]+)/i);
+  return {
+    title:clean(tm?.[1]||String(issue.title).replace(/^\[SAN LEVEL\]\s*/,''),80)||'Fase',
+    author:clean(am?.[1]||issue.user?.login||'Comunidade',40)||'Comunidade',
+    shareUrl:link.toString(),
+    createdAt:String(issue.created_at||''),
+    issueUrl:String(issue.html_url||'')
+  };
+}
+function card(item){
+  const el=document.createElement('article');el.className='levelCard';
+  const h=document.createElement('h2');h.textContent=item.title;el.appendChild(h);
+  const meta=document.createElement('div');meta.className='levelMeta';
+  const date=item.createdAt?new Date(item.createdAt).toLocaleDateString('pt-BR'):'';
+  meta.textContent='por '+item.author+(date?' • '+date:'');el.appendChild(meta);
+  const row=document.createElement('div');row.className='rowBtns';
+  const play=document.createElement('a');play.href=item.shareUrl;play.textContent='▶ Jogar';row.appendChild(play);
+  const issue=document.createElement('a');issue.href=item.issueUrl;issue.target='_blank';issue.rel='noopener noreferrer';issue.textContent='GitHub';row.appendChild(issue);
+  el.appendChild(row);return el;
+}
+async function load(){
+  state.textContent='Carregando fases...';grid.replaceChildren();
+  try{
+    const u=new URL(API);u.searchParams.set('state','open');u.searchParams.set('per_page','50');u.searchParams.set('sort','created');u.searchParams.set('direction','desc');
+    const res=await fetch(u,{headers:{Accept:'application/vnd.github+json'}});
+    if(!res.ok)throw new Error('GitHub respondeu '+res.status);
+    const raw=await res.json(),levels=(Array.isArray(raw)?raw:[]).map(parse).filter(Boolean);
+    state.textContent=levels.length?levels.length+' fase(s) pública(s).':'Nenhuma fase pública ainda.';
+    if(!levels.length){const empty=document.createElement('div');empty.className='emptyState';empty.textContent='O catálogo está vazio. Crie uma fase no editor e seja o primeiro a publicar.';grid.appendChild(empty);return;}
+    for(const item of levels)grid.appendChild(card(item));
+  }catch(e){state.textContent='Não foi possível carregar o catálogo: '+(e?.message||'erro desconhecido');}
+}
+document.getElementById('refreshBtn').onclick=load;
+document.getElementById('editorBtn').onclick=()=>location.href='../';
+load();
+</script>
+</body>
+</html>
