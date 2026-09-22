@@ -1,11 +1,11 @@
-# SandBox / Editor de Mapas San — v1.2.2
+# SandBox / Editor de Mapas San — v1.3.0
 
 **▶ [Abrir o Editor Online](https://vuthos.github.io/SandBox-San/)**  
 **🌐 [Explorar fases da comunidade](https://vuthos.github.io/SandBox-San/community/)**
 
 > Para usar o SandBox, não é necessário baixar o `index.html`. O link acima abre diretamente a versão publicada pelo GitHub Pages.
 
-Editor visual de fases 2D em HTML5 Canvas. A v1.2.2 mantém a primeira camada comunitária online e melhora o acesso direto pelo GitHub Pages sem abandonar o formato **SAN Map v7**, o modo standalone e o hardening de mapas JSON.
+Editor visual de fases 2D em HTML5 Canvas. A v1.3.0 adiciona cenários em xadrez personalizáveis, gelo, água e blocos de impulso sem abandonar o formato **SAN Map v7**, o modo standalone e a camada comunitária online.
 
 ## Estrutura
 
@@ -69,3 +69,12 @@ Veja `docs/ONLINE.md` para arquitetura, limites e segurança.
 ## 🔒 v1.2.2 — Security Hardening
 
 A camada online agora restringe links comunitários ao Pages oficial, limita a descompressão de mapas compartilhados, aplica CSP e fixa as GitHub Actions de deploy por SHA imutável. Consulte `SECURITY.md`.
+
+## 🎨 v1.3.0 — Cenários e Superfícies
+
+- fundo em xadrez com branco + uma cor hexadecimal escolhida pelo criador;
+- piso de gelo com inércia leve;
+- piso de água que reduz a velocidade;
+- blocos de seta nas quatro direções para impulsionar o jogador;
+- superfícies usam uma única coleção `floorTiles`, mantendo o modelo simples;
+- fundo visual não cria milhares de objetos: ele é renderizado como padrão repetido.

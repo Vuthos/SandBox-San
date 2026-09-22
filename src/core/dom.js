@@ -14,6 +14,7 @@ const routeInfo=$('routeInfo'),guidedSpeed=$('guidedSpeed');
 const finishGuideBtn=$('finishGuideBtn'),cancelGuideBtn=$('cancelGuideBtn');
 const resetCollectibles=$('resetCollectibles'),resetLogic=$('resetLogic'),resetEnemies=$('resetEnemies');
 const autosaveLabel=$('autosaveLabel'), mapColsInput=$('mapCols'), mapRowsInput=$('mapRows');
+const backgroundColor=$('backgroundColor'),backgroundHex=$('backgroundHex');
 const canvasWrap = canvas.closest('.canvasWrap');
 const zoomOutBtn=$('zoomOutBtn'),zoomInBtn=$('zoomInBtn'),zoomResetBtn=$('zoomResetBtn');
 const duplicateBtn=$('duplicateBtn'),copyBtn=$('copyBtn'),pasteBtn=$('pasteBtn'),validateBtn=$('validateBtn');

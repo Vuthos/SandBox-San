@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.3.0 — Cenários e Superfícies
+
+- Cenário em xadrez: branco + cor hexadecimal personalizável.
+- Piso de gelo com deslizamento leve.
+- Piso de água com redução de velocidade.
+- Setas de impulso para cima, baixo, esquerda e direita.
+- Nova coleção compacta `floorTiles` com limite de segurança.
+- Renderização do xadrez usa padrão em cache para evitar peso desnecessário.
+- Compatibilidade mantida com SAN Map v7; mapas antigos continuam abrindo com fundo padrão.
+
 ## v1.2.2 — Security Hardening
 
 - Catálogo aceita apenas links oficiais de `https://vuthos.github.io/SandBox-San/`.

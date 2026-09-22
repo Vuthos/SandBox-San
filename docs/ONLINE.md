@@ -1,6 +1,6 @@
-# SandBox Online — v1.2.2
+# SandBox Online — v1.3.0
 
-A v1.2.2 inicia a camada comunitária do SandBox sem exigir um servidor privado.
+A v1.3.0 preserva a camada comunitária do SandBox e passa a compartilhar também os novos cenários e pisos por meio do mesmo payload SAN Map.
 
 ## O que funciona
 
