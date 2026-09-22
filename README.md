@@ -1,6 +1,6 @@
-# SandBox / Editor de Mapas San — v1.1.3
+# SandBox / Editor de Mapas San — v1.1.4
 
-Editor visual de fases 2D em HTML5 Canvas. A v1.1.3 adiciona hardening para tratar mapas JSON de terceiros como entrada não confiável, mantendo o formato **SAN Map v7**.
+Editor visual de fases 2D em HTML5 Canvas. A v1.1.4 mantém o hardening da v1.1.3 e corrige o carregamento visual para tratar mapas JSON de terceiros como entrada não confiável, mantendo o formato **SAN Map v7**.
 
 ## Estrutura
 
@@ -37,3 +37,8 @@ Abra `index.html` em um navegador moderno ou publique a raiz no GitHub Pages. N�
 ## Filosofia
 
 A série v1.1.x prioriza estabilidade, segurança e manutenção antes de novas mecânicas.
+
+
+## v1.1.4
+
+O CSS principal e o ícone também ficam embutidos no `index.html`, então o visual continua carregando mesmo quando o HTML é aberto isoladamente. A árvore modular permanece disponível em `styles/`, `assets/` e `src/`.
