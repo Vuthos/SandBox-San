@@ -53,6 +53,7 @@ async function build(){
   const {css,sources}=await loadSources();
   let next=original.replace(/<style>[\s\S]*?<\/style>/,`<style>\n${css}\n</style>`);
   next=next.replace(/<script>[\s\S]*?<\/script>/,`<script>\n${standaloneScript(sources)}\n</script>`);
+  const scriptMatch=next.match(/<script>([\s\S]*?)<\/script>/);if(!scriptMatch)throw new Error('Bloco de runtime não encontrado no standalone.');new Function(scriptMatch[1]);
   return {original,next,css,sources};
 }
 
