@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.1 — sincronização de inimigos
+
+- Todos os inimigos agora recebem o mesmo frame de atualização antes do respawn por colisão.
+- Corrigido descompasso acumulado entre inimigos de mesma velocidade após mortes sucessivas.
+- O respawn ocorre somente depois da atualização do conjunto de inimigos naquele frame.
+
 ## v1.3.0 — Cenários e Superfícies
 
 - Cenário em xadrez: branco + cor hexadecimal personalizável.
