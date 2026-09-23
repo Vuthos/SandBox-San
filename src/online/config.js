@@ -1,7 +1,7 @@
 'use strict';
 
 const ONLINE_CONFIG = Object.freeze({
-  version: '1.3.0',
+  version: '1.3.1',
   publicBaseUrl: 'https://vuthos.github.io/SandBox-San/',
   repository: 'Vuthos/SandBox-San',
   issuesApi: 'https://api.github.com/repos/Vuthos/SandBox-San/issues',
