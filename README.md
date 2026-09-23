@@ -1,11 +1,11 @@
-# SandBox / Editor de Mapas San — v1.3.1
+# SandBox / Editor de Mapas San — v1.3.2
 
 **▶ [Abrir o Editor Online](https://vuthos.github.io/SandBox-San/)**  
 **🌐 [Explorar fases da comunidade](https://vuthos.github.io/SandBox-San/community/)**
 
 > Para usar o SandBox, não é necessário baixar o `index.html`. O link acima abre diretamente a versão publicada pelo GitHub Pages.
 
-Editor visual de fases 2D em HTML5 Canvas. A v1.3.0 adiciona cenários em xadrez personalizáveis, gelo, água e blocos de impulso sem abandonar o formato **SAN Map v7**, o modo standalone e a camada comunitária online.
+Editor visual de fases 2D em HTML5 Canvas. A v1.3.2 consolida a base para crescimento comercial: otimiza pisos especiais, adiciona testes automatizados e passa a gerar o standalone a partir do código modular.
 
 ## Estrutura
 
@@ -78,3 +78,22 @@ A camada online agora restringe links comunitários ao Pages oficial, limita a d
 - blocos de seta nas quatro direções para impulsionar o jogador;
 - superfícies usam uma única coleção `floorTiles`, mantendo o modelo simples;
 - fundo visual não cria milhares de objetos: ele é renderizado como padrão repetido.
+
+
+## ⚙️ v1.3.2 — Product Foundation
+
+- lookup de pisos especiais por célula em tempo constante com índice `Map`;
+- camada visual de pisos renderizada em cache e reconstruída apenas quando muda;
+- pincel de pisos gera um único item de histórico por gesto;
+- testes automatizados de determinismo e regressão da sincronização de inimigos;
+- `index.html` standalone gerado automaticamente a partir de `src/` e `styles/main.css`;
+- CI executa testes e verifica sincronização antes do merge;
+- deploy do GitHub Pages testa e gera o standalone antes de publicar.
+
+### Desenvolvimento
+
+`npm test` executa a suíte de regressão.  
+`npm run build` regenera o standalone.  
+`npm run check` executa testes + verificação de sincronização.
+
+A política de licenciamento comercial ainda deve ser escolhida conscientemente antes de um lançamento maior; o projeto continua sem arquivo `LICENSE` nesta etapa.
