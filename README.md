@@ -1,4 +1,4 @@
-# SandBox / Editor de Mapas San — v1.3.0
+# SandBox / Editor de Mapas San — v1.3.1
 
 **▶ [Abrir o Editor Online](https://vuthos.github.io/SandBox-San/)**  
 **🌐 [Explorar fases da comunidade](https://vuthos.github.io/SandBox-San/community/)**
