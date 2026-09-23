@@ -42,3 +42,10 @@ O `index.html` standalone ainda embute JavaScript e CSS, então a CSP precisa pe
 ## Superfícies da v1.3.0
 
 Os pisos especiais aceitam somente tipos conhecidos (`ice`, `water` e quatro direções de seta). Coordenadas são normalizadas e pisos fora do mapa são removidos. O cenário aceita somente cores hexadecimais de seis dígitos no formato `#RRGGBB`.
+
+
+## v1.3.2 — estabilidade operacional
+
+A v1.3.2 adiciona testes automatizados de regressão para a simulação e faz o deploy executar teste + build antes da publicação. O índice de pisos e o cache visual são estruturas derivadas do SAN Map: não adicionam novos campos confiáveis vindos de conteúdo externo.
+
+O build do standalone usa apenas módulos locais conhecidos pelo projeto e não instala dependências de runtime.
