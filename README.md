@@ -87,13 +87,13 @@ A camada online agora restringe links comunitários ao Pages oficial, limita a d
 - pincel de pisos gera um único item de histórico por gesto;
 - testes automatizados de determinismo e regressão da sincronização de inimigos;
 - `index.html` standalone gerado automaticamente a partir de `src/` e `styles/main.css`;
-- CI executa testes e verifica sincronização antes do merge;
+- CI executa testes e regenera/valida o standalone antes do merge;
 - deploy do GitHub Pages testa e gera o standalone antes de publicar.
 
 ### Desenvolvimento
 
 `npm test` executa a suíte de regressão.  
 `npm run build` regenera o standalone.  
-`npm run check` executa testes + verificação de sincronização.
+`npm run check` executa testes + geração/validação do standalone.
 
 A política de licenciamento comercial ainda deve ser escolhida conscientemente antes de um lançamento maior; o projeto continua sem arquivo `LICENSE` nesta etapa.
