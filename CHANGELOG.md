@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.3.2 — Product Foundation
+
+- Índice O(1) para localizar pisos especiais pela célula do jogador.
+- Cache da camada visual de gelo, água e setas; ela só é reconstruída quando os pisos mudam.
+- Pintura por arraste registra apenas um commit no histórico por gesto.
+- Helper determinístico para atualizar todos os inimigos no mesmo frame.
+- Testes automatizados cobrem regressão de sincronização e movimento determinístico.
+- Build zero-dependency gera o `index.html` standalone a partir da árvore modular.
+- CI em pull requests e `main`.
+- Deploy do Pages passa por teste e build antes da publicação.
+- Arquitetura e preparação comercial documentadas.
+
 ## v1.3.1 — sincronização de inimigos
 
 - Todos os inimigos agora recebem o mesmo frame de atualização antes do respawn por colisão.
