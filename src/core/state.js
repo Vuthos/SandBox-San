@@ -9,3 +9,4 @@ let history=[],historyIndex=-1,historyLock=false;
 let viewportZoom=1,panState=null,spacePan=false;
 let selectedItems=[],clipboardItems=[],selectToggleMode=false,selectionRect=null,selectionStart=null;
 let templatesCache=[];
+let floorTileIndex=new Map(),floorVisualRevision=0,floorPaintDirty=false;
