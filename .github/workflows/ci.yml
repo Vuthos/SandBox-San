@@ -19,7 +19,5 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '22'
-      - name: Test
-        run: npm test
-      - name: Verify standalone
-        run: npm run build:check
+      - name: Test and build standalone
+        run: npm run check
