@@ -78,3 +78,7 @@ A camada online agora restringe links comunitários ao Pages oficial, limita a d
 - blocos de seta nas quatro direções para impulsionar o jogador;
 - superfícies usam uma única coleção `floorTiles`, mantendo o modelo simples;
 - fundo visual não cria milhares de objetos: ele é renderizado como padrão repetido.
+
+## v1.3.1 — sincronização determinística
+
+Corrige a atualização dos inimigos no frame em que o jogador colide: todos os inimigos ativos recebem o mesmo `dt` antes do respawn, evitando que patrulhas de mesma velocidade percam sincronia após mortes.
