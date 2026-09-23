@@ -30,7 +30,7 @@ index.html standalone
 GitHub Pages
 ```
 
-O workflow de Pages executa testes e o build antes do deploy. A CI também verifica que o standalone versionado está sincronizado.
+O workflow de Pages executa testes e o build antes do deploy. A CI regenera e valida sintaticamente o standalone a partir das fontes antes do merge.
 
 ## Pisos especiais
 
