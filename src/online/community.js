@@ -17,7 +17,7 @@ function buildCommunityIssueUrl(shareUrl,alias){
     '**Formato:** SAN Map v7',
     '**Link:** '+shareUrl,
     '',
-    '> Envio criado pelo SandBox Editor v1.3.0.'
+    '> Envio criado pelo SandBox Editor v1.3.2.'
   ].join('\n');
   const u=new URL(ONLINE_CONFIG.issuesNewUrl);
   u.searchParams.set('title',title);
