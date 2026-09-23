@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.1 — correção de sincronização
+
+- Todos os inimigos ativos são atualizados antes de processar o respawn por colisão.
+- Remove a perda de um frame dos inimigos que vinham depois daquele que colidiu com o jogador.
+- Patrulhas com mesma velocidade permanecem sincronizadas após mortes repetidas.
+
 ## v1.3.1 — sincronização de inimigos
 
 - Todos os inimigos agora recebem o mesmo frame de atualização antes do respawn por colisão.
