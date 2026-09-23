@@ -1,4 +1,4 @@
-# SandBox Online — v1.3.0
+# SandBox Online — v1.3.2
 
 A v1.3.0 preserva a camada comunitária do SandBox e passa a compartilhar também os novos cenários e pisos por meio do mesmo payload SAN Map.
 
@@ -31,3 +31,8 @@ URL planejada:
 ## Hardening da v1.2.2
 
 A URL de uma fase pública precisa pertencer ao Pages oficial do projeto. O payload compartilhado também é limitado enquanto é descompactado, antes do parsing do JSON. O deploy usa dependências do GitHub Actions fixadas por SHA.
+
+
+## Pipeline da v1.3.2
+
+Antes de publicar no GitHub Pages, o workflow executa a suíte automatizada e regenera o `index.html` standalone a partir dos módulos. A camada online, o catálogo e o formato SAN Map permanecem compatíveis com a v1.3.x.
